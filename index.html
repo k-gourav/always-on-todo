@@ -46,6 +46,11 @@
         background-color: #bbb;
         border-radius: 10px;
       }
+
+      /* Dark mode scrollbar */
+      .dark .overflow-y-auto::-webkit-scrollbar-thumb {
+        background-color: #555;
+      }
     </style>
   </head>
 
@@ -66,6 +71,12 @@
               console.log('ServiceWorker registration failed:', error);
             });
         });
+      }
+
+      // Apply saved theme on page load
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
       }
     </script>
   </body>
