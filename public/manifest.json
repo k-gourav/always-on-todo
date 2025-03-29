@@ -1,12 +1,11 @@
-
 {
   "name": "Always-On Todo",
   "short_name": "Todo",
   "description": "Minimalist always-on to-do app",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff",
+  "background_color": "#111827",
+  "theme_color": "#111827",
   "icons": [
     {
       "src": "/todo-icon-192.png",

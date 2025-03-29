@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,9 +7,11 @@
     <meta name="description" content="Minimalist always-on to-do app" />
     <meta name="author" content="Lovable" />
     <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#111827" />
     <link rel="icon" href="/todo-icon-192.png" />
     <link rel="apple-touch-icon" href="/todo-icon-192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
     <meta property="og:title" content="Always-On Todo" />
     <meta property="og:description" content="Minimalist always-on to-do app" />
@@ -43,13 +44,8 @@
       }
       
       .overflow-y-auto::-webkit-scrollbar-thumb {
-        background-color: #bbb;
-        border-radius: 10px;
-      }
-
-      /* Dark mode scrollbar */
-      .dark .overflow-y-auto::-webkit-scrollbar-thumb {
         background-color: #555;
+        border-radius: 10px;
       }
     </style>
   </head>
@@ -60,12 +56,20 @@
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
     <script>
+      // Debug PWA support
+      console.log('PWA Debug:', {
+        serviceWorker: 'serviceWorker' in navigator,
+        standalone: window.matchMedia('(display-mode: standalone)').matches,
+        manifest: !!document.querySelector('link[rel="manifest"]'),
+        userAgent: navigator.userAgent
+      });
+
       // Register service worker for PWA
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/service-worker.js')
             .then(registration => {
-              console.log('ServiceWorker registration successful');
+              console.log('ServiceWorker registration successful:', registration);
             })
             .catch(error => {
               console.log('ServiceWorker registration failed:', error);
@@ -73,11 +77,8 @@
         });
       }
 
-      // Apply saved theme on page load
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-      }
+      // Always set dark mode
+      document.documentElement.classList.add('dark');
     </script>
   </body>
 </html>
