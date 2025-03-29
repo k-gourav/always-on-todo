@@ -1,20 +1,40 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>always-on-todo</title>
-    <meta name="description" content="Lovable Generated Project" />
+    <title>Always-On Todo</title>
+    <meta name="description" content="Minimalist always-on to-do app" />
     <meta name="author" content="Lovable" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="/todo-icon-192.png" />
+    <link rel="apple-touch-icon" href="/todo-icon-192.png" />
 
-    <meta property="og:title" content="Lovable Generated Project" />
-    <meta property="og:description" content="Lovable Generated Project" />
+    <meta property="og:title" content="Always-On Todo" />
+    <meta property="og:description" content="Minimalist always-on to-do app" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@lovable_dev" />
     <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    
+    <style>
+      /* Custom styles for always-on functionality */
+      .todo-app {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 25vw; /* One quarter of screen width */
+        height: 100vh;
+        overflow: hidden;
+        border-left: 1px solid #eaeaea;
+        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.05);
+        z-index: 9999; /* Stay on top */
+      }
+    </style>
   </head>
 
   <body>
@@ -22,5 +42,19 @@
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Register service worker for PWA
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then(registration => {
+              console.log('ServiceWorker registration successful');
+            })
+            .catch(error => {
+              console.log('ServiceWorker registration failed:', error);
+            });
+        });
+      }
+    </script>
   </body>
 </html>
