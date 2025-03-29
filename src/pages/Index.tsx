@@ -56,8 +56,8 @@ const Index = () => {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-white text-gray-800 todo-app">
-      <div className="flex-1 flex flex-col max-h-screen overflow-hidden border border-gray-200">
+    <div className="h-screen w-full flex flex-col bg-white text-gray-800 todo-app">
+      <div className="flex-1 flex flex-col max-h-screen overflow-hidden border-2 border-gray-300">
         <TodoTable 
           todos={todos} 
           onToggleComplete={toggleTodoComplete}

@@ -27,12 +27,24 @@
         position: fixed;
         top: 0;
         right: 0;
-        width: 25vw; /* One quarter of screen width */
+        width: 100%; /* Take full width */
         height: 100vh;
         overflow: hidden;
-        border-left: 1px solid #eaeaea;
-        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.05);
         z-index: 9999; /* Stay on top */
+      }
+      
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      .overflow-y-auto::-webkit-scrollbar {
+        width: 4px;
+      }
+      
+      .overflow-y-auto::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      
+      .overflow-y-auto::-webkit-scrollbar-thumb {
+        background-color: #bbb;
+        border-radius: 10px;
       }
     </style>
   </head>

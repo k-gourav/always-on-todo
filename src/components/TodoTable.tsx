@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 import { Todo } from "@/types/todo";
-import { Check, Edit } from "lucide-react";
+import { Check } from "lucide-react";
 
 interface TodoTableProps {
   todos: Todo[];
@@ -39,30 +39,29 @@ const TodoTable: React.FC<TodoTableProps> = ({
   };
 
   return (
-    <div className="flex-1 overflow-hidden flex flex-col border border-gray-200">
+    <div className="flex-1 overflow-hidden flex flex-col border border-gray-300">
       {/* Fixed header */}
-      <div className="grid grid-cols-10 text-sm font-medium border-b border-gray-200 py-2 px-2 bg-white">
-        <div className="col-span-1 flex items-center justify-center">✅</div>
-        <div className="col-span-2 flex items-center">Date</div>
-        <div className="col-span-6 flex items-center">Task</div>
-        <div className="col-span-1 flex items-center justify-center">Edit</div>
+      <div className="grid grid-cols-9 text-sm font-medium border-b border-gray-300 py-2 px-2 bg-white">
+        <div className="col-span-1 flex items-center justify-center border-r border-gray-300">✅</div>
+        <div className="col-span-2 flex items-center border-r border-gray-300 px-2">Date</div>
+        <div className="col-span-6 flex items-center px-2">Task</div>
       </div>
 
       {/* Scrollable body */}
       <div className="flex-1 overflow-y-auto">
         {todos.length === 0 ? (
-          <div className="flex items-center justify-center h-20 text-gray-400 italic border-b border-gray-100">
+          <div className="flex items-center justify-center h-20 text-gray-400 italic border-b border-gray-300">
             No tasks yet. Add one below.
           </div>
         ) : (
           todos.map((todo) => (
             <div 
               key={todo.id} 
-              className={`grid grid-cols-10 border-b border-gray-100 py-2 px-2 text-sm hover:bg-gray-50 ${
+              className={`grid grid-cols-9 border-b border-gray-300 py-2 px-2 text-sm hover:bg-gray-50 ${
                 todo.completed ? "text-gray-400" : ""
               }`}
             >
-              <div className="col-span-1 flex items-center justify-center">
+              <div className="col-span-1 flex items-center justify-center border-r border-gray-300">
                 <button 
                   onClick={() => onToggleComplete(todo.id)}
                   className="focus:outline-none"
@@ -74,8 +73,11 @@ const TodoTable: React.FC<TodoTableProps> = ({
                   )}
                 </button>
               </div>
-              <div className="col-span-2 flex items-center border-r border-gray-100 h-full">{todo.date}</div>
-              <div className={`col-span-6 flex items-center border-r border-gray-100 h-full ${todo.completed ? "line-through" : ""}`}>
+              <div className="col-span-2 flex items-center border-r border-gray-300 px-2">{todo.date}</div>
+              <div 
+                className={`col-span-6 flex items-center px-2 ${todo.completed ? "line-through" : ""}`}
+                onClick={() => !todo.completed && startEditing(todo)}
+              >
                 {editingId === todo.id ? (
                   <input
                     type="text"
@@ -83,21 +85,14 @@ const TodoTable: React.FC<TodoTableProps> = ({
                     onChange={(e) => setEditValue(e.target.value)}
                     onBlur={saveEdit}
                     onKeyDown={handleKeyDown}
-                    className="w-full py-1 px-2 focus:outline-none"
+                    className="w-full py-1 px-1 focus:outline-none border border-blue-400"
                     autoFocus
                   />
                 ) : (
-                  todo.task
+                  <div className="w-full cursor-pointer">
+                    {todo.task}
+                  </div>
                 )}
-              </div>
-              <div className="col-span-1 flex items-center justify-center">
-                <button
-                  onClick={() => startEditing(todo)}
-                  className="focus:outline-none text-gray-400 hover:text-gray-600"
-                  disabled={editingId !== null}
-                >
-                  <Edit className="h-4 w-4" />
-                </button>
               </div>
             </div>
           ))
