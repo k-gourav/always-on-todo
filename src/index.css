@@ -46,6 +46,7 @@
     @apply bg-background text-foreground antialiased;
     margin: 0;
     padding: 0;
+    overflow: hidden;
   }
 
   input, button {
@@ -67,6 +68,10 @@
   border-radius: 10px;
 }
 
+.dark .overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: #555;
+}
+
 /* Remove default focus outline and replace with a subtle one */
 *:focus {
   outline: none;
@@ -74,4 +79,11 @@
 
 *:focus-visible {
   outline: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Fix for text overflow */
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

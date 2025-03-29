@@ -56,7 +56,7 @@ const TodoTable: React.FC<TodoTableProps> = ({
           todos.map((todo) => (
             <div 
               key={todo.id} 
-              className={`grid grid-cols-7 border-b-2 border-gray-300 dark:border-gray-700 py-2 px-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 h-10 ${
+              className={`grid grid-cols-7 border-b-2 border-gray-300 dark:border-gray-700 py-3 px-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 min-h-[48px] max-h-fit ${
                 todo.completed ? "text-gray-400 dark:text-gray-500" : "dark:text-gray-200"
               }`}
             >
@@ -74,7 +74,7 @@ const TodoTable: React.FC<TodoTableProps> = ({
               </div>
               <div className="col-span-2 flex items-center border-r-2 border-gray-300 dark:border-gray-700 px-2">{todo.date}</div>
               <div 
-                className={`col-span-4 flex items-center px-2 ${todo.completed ? "line-through" : ""} cursor-pointer`}
+                className={`col-span-4 flex items-center px-2 ${todo.completed ? "line-through" : ""} cursor-pointer overflow-hidden`}
                 onClick={() => !todo.completed && startEditing(todo)}
               >
                 {editingId === todo.id ? (
@@ -88,7 +88,7 @@ const TodoTable: React.FC<TodoTableProps> = ({
                     autoFocus
                   />
                 ) : (
-                  <div className="w-full">
+                  <div className="w-full truncate">
                     {todo.task}
                   </div>
                 )}

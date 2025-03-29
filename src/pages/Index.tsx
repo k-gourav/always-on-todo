@@ -79,7 +79,7 @@ const Index = () => {
   };
 
   return (
-    <div className="h-screen w-full flex flex-col bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 todo-app">
+    <div className="h-screen w-full flex flex-col bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 todo-app overflow-hidden">
       <div className="flex items-center justify-end p-2 bg-white dark:bg-gray-900">
         <button 
           onClick={toggleTheme} 
@@ -89,7 +89,7 @@ const Index = () => {
           {isDarkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
         </button>
       </div>
-      <div className="flex-1 flex flex-col max-h-screen overflow-hidden">
+      <div className="flex-1 flex flex-col overflow-hidden">
         <TodoTable 
           todos={todos} 
           onToggleComplete={toggleTodoComplete}
