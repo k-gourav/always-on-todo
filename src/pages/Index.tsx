@@ -25,7 +25,7 @@ const Index = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
 
-  const addTodo = (task: string, remarks: string = "") => {
+  const addTodo = (task: string) => {
     const today = new Date();
     const formattedDate = `${today.getDate()} ${today.toLocaleString('default', { month: 'short' })}`;
     
@@ -33,8 +33,7 @@ const Index = () => {
       id: Date.now(),
       completed: false,
       date: formattedDate,
-      task,
-      remarks
+      task
     };
     
     setTodos([...todos, newTodo]);
@@ -48,10 +47,22 @@ const Index = () => {
     );
   };
 
+  const updateTask = (id: number, newTask: string) => {
+    setTodos(
+      todos.map(todo => 
+        todo.id === id ? { ...todo, task: newTask } : todo
+      )
+    );
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-white text-gray-800 todo-app">
-      <div className="flex-1 flex flex-col max-h-screen overflow-hidden">
-        <TodoTable todos={todos} onToggleComplete={toggleTodoComplete} />
+    <div className="h-screen flex flex-col bg-white text-gray-800 todo-app">
+      <div className="flex-1 flex flex-col max-h-screen overflow-hidden border border-gray-200">
+        <TodoTable 
+          todos={todos} 
+          onToggleComplete={toggleTodoComplete}
+          onUpdateTask={updateTask}
+        />
         <TodoInput onAddTodo={addTodo} />
       </div>
       <InstallPrompt />
